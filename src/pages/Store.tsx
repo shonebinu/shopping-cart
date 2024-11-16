@@ -17,6 +17,7 @@ type Product = {
 };
 
 function Store() {
+  // TODO: Implement loading and error screen
   const { isPending, error, data } = useQuery({
     queryKey: ["productsData"],
     queryFn: () =>
@@ -31,6 +32,11 @@ function Store() {
           data.map((product: Product) => (
             <Card className="rounded-sm" key={product.id}>
               <CardHeader>
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="aspect-square object-contain"
+                />
                 <CardTitle>
                   <p className="leading-5">{product.title}</p>
                 </CardTitle>
@@ -38,9 +44,7 @@ function Store() {
                   {product.category}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <img src={product.image} alt={product.title} className="w-5" />
-              </CardContent>
+              <CardContent></CardContent>
               <CardFooter>
                 <p>${product.price}</p>
               </CardFooter>
