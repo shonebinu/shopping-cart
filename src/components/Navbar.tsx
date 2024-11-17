@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
 
 function Navbar() {
   return (
@@ -17,6 +18,17 @@ function Navbar() {
           {({ isActive }) => (
             <Button variant="link" className={isActive ? "text-blue-500" : ""}>
               Store
+            </Button>
+          )}
+        </NavLink>
+        <NavLink to="/cart">
+          {({ isActive }) => (
+            <Button
+              variant="ghost"
+              size="icon"
+              className={isActive ? "text-blue-500" : ""}
+            >
+              <ShoppingCart />
             </Button>
           )}
         </NavLink>
