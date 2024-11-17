@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { LoaderCircle } from "lucide-react";
 
 type Product = {
   id: number;
@@ -17,13 +18,29 @@ type Product = {
 };
 
 function Store() {
-  // TODO: Implement loading and error screen
   const { isPending, error, data } = useQuery({
     queryKey: ["productsData"],
     queryFn: () =>
       fetch("https://fakestoreapi.com/products").then((res) => res.json()),
   });
   console.log(data);
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <LoaderCircle className="animate-spin" />
+        <p className="ml-2">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p>An error has occured: {error.message}</p>
+      </div>
+    );
+  }
 
   return (
     <section className="flex flex-col items-center p-8">
