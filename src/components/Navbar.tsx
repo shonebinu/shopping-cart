@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
 
 function Navbar({ cartItemsCount }: { cartItemsCount: number }) {
@@ -25,13 +26,12 @@ function Navbar({ cartItemsCount }: { cartItemsCount: number }) {
           {({ isActive }) => (
             <Button
               variant="ghost"
-              size="icon"
-              className={
-                isActive ? "text-blue-500 hover:text-blue-500 ml-2" : "ml-2"
-              }
+              className={isActive ? "text-blue-500 hover:text-blue-500" : ""}
             >
               <ShoppingCart />
-              <small>{cartItemsCount}</small>
+              <Badge variant="secondary" className="px-1">
+                <small className="w-2 text-center">{cartItemsCount}</small>
+              </Badge>
             </Button>
           )}
         </NavLink>
