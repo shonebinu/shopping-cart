@@ -26,7 +26,7 @@ function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className={isActive ? "text-blue-500" : ""}
+              className={isActive ? "text-blue-500 hover:text-blue-500" : ""}
             >
               <ShoppingCart />
             </Button>

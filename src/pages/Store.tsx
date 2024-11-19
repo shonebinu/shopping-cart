@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 
 type Product = {
@@ -44,10 +45,10 @@ function Store() {
 
   return (
     <section className="flex flex-col items-center p-8">
-      <div className="grid grid-cols-3 gap-3 w-[60%]">
+      <div className="grid grid-cols-4 gap-3 w-[60%]">
         {data &&
           data.map((product: Product) => (
-            <Card className="rounded-sm" key={product.id}>
+            <Card className="rounded-none grid" key={product.id}>
               <CardHeader>
                 <img
                   src={product.image}
@@ -62,8 +63,9 @@ function Store() {
                 </CardDescription>
               </CardHeader>
               <CardContent></CardContent>
-              <CardFooter>
-                <p>${product.price}</p>
+              <CardFooter className="self-end flex justify-between">
+                <p className="font-medium">${product.price}</p>
+                <Button>Add to Cart</Button>
               </CardFooter>
             </Card>
           ))}
