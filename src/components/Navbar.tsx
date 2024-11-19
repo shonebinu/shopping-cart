@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 
-function Navbar() {
+function Navbar({ cartItemsCount }: { cartItemsCount: number }) {
   return (
     <nav className="flex justify-between items-center py-2 px-8">
       <div className="font-semibold underline">fakestore</div>
@@ -26,9 +26,12 @@ function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className={isActive ? "text-blue-500 hover:text-blue-500" : ""}
+              className={
+                isActive ? "text-blue-500 hover:text-blue-500 ml-2" : "ml-2"
+              }
             >
               <ShoppingCart />
+              <small>{cartItemsCount}</small>
             </Button>
           )}
         </NavLink>

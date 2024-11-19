@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
+import { useOutletContext } from "react-router-dom";
 
 type Product = {
   id: number;
@@ -17,13 +18,22 @@ type Product = {
   price: number;
 };
 
+type CartContextType = React.Dispatch<React.SetStateAction<Product[]>>;
+
 function Store() {
   const { isPending, error, data } = useQuery({
     queryKey: ["productsData"],
     queryFn: () =>
       fetch("https://fakestoreapi.com/products").then((res) => res.json()),
   });
-  console.log(data);
+
+  const { setCartItems } = useOutletContext<{
+    setCartItems: CartContextType;
+  }>();
+
+  const handleAddToCart = (product: Product) => {
+    setCartItems((cartItems: Product[]) => [...cartItems, product]);
+  };
 
   if (isPending) {
     return (
@@ -63,7 +73,9 @@ function Store() {
               </CardHeader>
               <CardFooter className="self-end flex justify-between">
                 <p className="font-medium">${product.price}</p>
-                <Button>Add to Cart</Button>
+                <Button onClick={() => handleAddToCart(product)}>
+                  Add to Cart
+                </Button>
               </CardFooter>
             </Card>
           ))}
