@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -45,7 +44,7 @@ function Store() {
 
   return (
     <section className="flex flex-col items-center p-8">
-      <div className="grid grid-cols-4 gap-3 w-[60%]">
+      <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:w-[70%]">
         {data &&
           data.map((product: Product) => (
             <Card className="rounded-none grid" key={product.id}>
@@ -62,7 +61,6 @@ function Store() {
                   {product.category}
                 </CardDescription>
               </CardHeader>
-              <CardContent></CardContent>
               <CardFooter className="self-end flex justify-between">
                 <p className="font-medium">${product.price}</p>
                 <Button>Add to Cart</Button>
