@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import ItemsCountSelect from "./ItemsCountSelect";
 
 function StoreItemCard({
   product,
@@ -15,6 +17,10 @@ function StoreItemCard({
   product: Product;
   handleAddToCart: (product: Product, qty?: number) => void;
 }) {
+  const [selectValue, setSelectValue] = useState("1");
+
+  const onSelectChange = (value: string) => setSelectValue(value);
+
   return (
     <Card className="rounded-sm grid">
       <CardHeader>
@@ -33,10 +39,14 @@ function StoreItemCard({
       <CardFooter className="self-end flex justify-between gap-3">
         <p className="font-medium text-sm">${product.price}</p>
         <div className="flex gap-1">
+          <ItemsCountSelect
+            value={selectValue.toString()}
+            onChange={onSelectChange}
+          />
           <Button
             variant="secondary"
             className="text-xs"
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCart(product, +selectValue)}
           >
             Add to Cart
           </Button>

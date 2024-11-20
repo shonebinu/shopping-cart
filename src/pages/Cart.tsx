@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Product } from "../types";
+import { Trash2 } from "lucide-react";
 
 type CartContextType = React.Dispatch<React.SetStateAction<Product[]>>;
 
@@ -54,10 +55,10 @@ function Cart() {
               </p>
               <Button
                 variant={"destructive"}
-                className="text-xs"
                 onClick={() => handleRemoveFromCart(item.id)}
+                size="icon"
               >
-                Remove
+                <Trash2 />
               </Button>
             </div>
           </div>
