@@ -16,7 +16,7 @@ function StoreItemCard({
   handleAddToCart: (product: Product, qty?: number) => void;
 }) {
   return (
-    <Card className="rounded-none grid">
+    <Card className="rounded-sm grid">
       <CardHeader>
         <img
           src={product.image}
