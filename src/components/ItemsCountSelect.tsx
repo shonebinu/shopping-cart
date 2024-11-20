@@ -18,11 +18,11 @@ function ItemsCountSelect({
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger>
-        <SelectValue placeholder="Qty" />
+        <SelectValue placeholder="Quantity" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Qty</SelectLabel>
+          <SelectLabel>Quantity</SelectLabel>
           {Array.from({ length: 9 }, (_, i) => (
             <SelectItem value={(i + 1).toString()} key={i}>
               {i + 1}

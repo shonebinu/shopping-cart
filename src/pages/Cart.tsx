@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Product } from "../types";
-import { Trash2 } from "lucide-react";
+import CartItemCard from "@/components/CartItemCard";
 
 type CartContextType = React.Dispatch<React.SetStateAction<Product[]>>;
 
@@ -22,6 +22,14 @@ function Cart() {
     );
   };
 
+  const handleQtyChange = (id: number, qty: number) => {
+    setCartItems((cartItems) =>
+      cartItems.map((item) =>
+        item.id === id ? { ...item, qty: qty } : { ...item }
+      )
+    );
+  };
+
   if (cartItems.length === 0) {
     return (
       <section className="flex justify-center items-center h-full">
@@ -34,34 +42,11 @@ function Cart() {
     <section className="flex flex-col p-8 items-center">
       <div className="w-full lg:w-[60%] flex flex-col gap-2">
         {cartItems.map((item: Product) => (
-          <div
-            className="shadow-sm rounded-sm flex justify-between p-2 border"
-            key={item.id}
-          >
-            <div className="flex gap-3">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-20 aspect-square object-contain"
-              />
-              <div>
-                <p className="text">{item.title}</p>
-                <p className="font-medium text-sm mt-1">${item.price}</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-around">
-              <p className="text-sm">
-                Qty: <span className="font-medium">{item.qty}</span>
-              </p>
-              <Button
-                variant={"destructive"}
-                onClick={() => handleRemoveFromCart(item.id)}
-                size="icon"
-              >
-                <Trash2 />
-              </Button>
-            </div>
-          </div>
+          <CartItemCard
+            item={item}
+            handleRemoveFromCart={handleRemoveFromCart}
+            handleQtyChange={handleQtyChange}
+          />
         ))}
         <div className="ml-auto mt-2 flex flex-col gap-2 items-end">
           <p className="text-sm">
