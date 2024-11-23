@@ -59,4 +59,10 @@ describe("StoreItemCard", () => {
     await userEvent.click(addToCartButton);
     expect(handleAddToCart).toHaveBeenCalledWith(mockProduct, mockQuantity);
   });
+
+  it("renders the product image", () => {
+    render(<StoreItemCard product={mockProduct} handleAddToCart={vi.fn()} />);
+    const productImage = screen.getByAltText(mockProduct.title);
+    expect(productImage).toHaveAttribute("src", mockProduct.image);
+  });
 });

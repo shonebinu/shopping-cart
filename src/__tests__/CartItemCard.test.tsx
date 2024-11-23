@@ -15,14 +15,11 @@ describe("CartItemCard", () => {
   };
 
   it("renders product details correctly", () => {
-    const handleRemoveFromCart = vi.fn();
-    const handleQtyChange = vi.fn();
-
     render(
       <CartItemCard
         item={mockProduct}
-        handleRemoveFromCart={handleRemoveFromCart}
-        handleQtyChange={handleQtyChange}
+        handleRemoveFromCart={vi.fn()}
+        handleQtyChange={vi.fn()}
       />
     );
 
@@ -32,13 +29,12 @@ describe("CartItemCard", () => {
 
   it("handles remove action correctly", async () => {
     const handleRemoveFromCart = vi.fn();
-    const handleQtyChange = vi.fn();
 
     render(
       <CartItemCard
         item={mockProduct}
         handleRemoveFromCart={handleRemoveFromCart}
-        handleQtyChange={handleQtyChange}
+        handleQtyChange={vi.fn()}
       />
     );
 
@@ -48,13 +44,12 @@ describe("CartItemCard", () => {
   });
 
   it("calls handleQtyChange when quantity is changed", async () => {
-    const handleRemoveFromCart = vi.fn();
     const handleQtyChange = vi.fn();
 
     render(
       <CartItemCard
         item={mockProduct}
-        handleRemoveFromCart={handleRemoveFromCart}
+        handleRemoveFromCart={vi.fn()}
         handleQtyChange={handleQtyChange}
       />
     );
@@ -67,5 +62,18 @@ describe("CartItemCard", () => {
 
     expect(handleQtyChange).toHaveBeenCalledWith(1, 2); // Ensure the correct item id and qty are passed
     expect(handleQtyChange).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders the product image", () => {
+    render(
+      <CartItemCard
+        item={mockProduct}
+        handleRemoveFromCart={vi.fn()}
+        handleQtyChange={vi.fn()}
+      />
+    );
+
+    const productImage = screen.getByAltText(mockProduct.title);
+    expect(productImage).toHaveAttribute("src", mockProduct.image);
   });
 });
